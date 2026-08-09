@@ -1,12 +1,31 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 
 export default function ChallengeDayPage() {
   const [stage, setStage] = useState<'problem' | 'submit' | 'complete'>('problem');
-  const [githubUrl, setGithubUrl] = useState('');
-  const [linkedinUrl, setLinkedinUrl] = useState('');
+  const [githubUrl, setGithubUrl] = useState('https://github.com/username/repo');
+  const [linkedinUrl, setLinkedinUrl] = useState('https://linkedin.com/posts/...');
+
+  const submitSectionRef = useRef<HTMLElement>(null);
+  const completeSectionRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    if (stage === 'submit') {
+      submitSectionRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    } else if (stage === 'complete') {
+      completeSectionRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }, [stage]);
+
+  const handleLetsCode = () => {
+    setStage('submit');
+  };
+
+  const handleSubmit = () => {
+    setStage('complete');
+  };
 
   const isGithubValid = githubUrl.trim().length > 0 && githubUrl.startsWith('https://');
   const isLinkedinValid = linkedinUrl.trim().length > 0 && linkedinUrl.startsWith('https://');
@@ -85,8 +104,8 @@ export default function ChallengeDayPage() {
             
             {stage === 'problem' && (
               <button 
-                onClick={() => setStage('submit')}
-                className="w-full bg-primary-container text-background font-headline-md text-headline-md-mobile py-4 rounded-xl glow-button flex items-center justify-center gap-2 hover:opacity-90 transition-opacity"
+                onClick={handleLetsCode}
+                className="w-full bg-primary-container text-background font-headline-md text-headline-md-mobile py-4 rounded-xl glow-box flex items-center justify-center gap-2 hover:opacity-90 transition-opacity"
               >
                 LET&apos;S CODE
                 <span className="material-symbols-outlined">arrow_forward</span>
@@ -104,7 +123,7 @@ export default function ChallengeDayPage() {
               </div>
 
               {/* Section B: Submit Proof */}
-              <section className="px-margin-mobile mb-stack-xl">
+              <section ref={submitSectionRef} className="px-margin-mobile mb-stack-xl">
                 <h2 className="font-headline-md text-headline-md-mobile text-on-surface mb-stack-sm">Submit Your Proof</h2>
                 <p className="text-on-surface-variant font-body-md mb-stack-lg">Show the world your progress! 🚀</p>
                 
@@ -160,16 +179,14 @@ export default function ChallengeDayPage() {
                   </div>
                 </div>
 
-                {stage === 'submit' && (
-                  <button 
-                    onClick={() => setStage('complete')}
-                    disabled={!canSubmit}
-                    className={`w-full bg-primary-container text-background font-headline-md text-[20px] font-bold py-4 rounded-xl flex items-center justify-center gap-2 transition-opacity mb-3 ${canSubmit ? 'glow-button hover:opacity-90' : 'opacity-50 cursor-not-allowed'}`}
-                  >
-                    SUBMIT DAY 12
-                    <span className="material-symbols-outlined">arrow_forward</span>
-                  </button>
-                )}
+                <button 
+                  onClick={handleSubmit}
+                  disabled={!canSubmit || stage === 'complete'}
+                  className={`w-full bg-primary-container text-background font-headline-md text-[20px] font-bold py-4 rounded-xl flex items-center justify-center gap-2 transition-opacity mb-3 ${canSubmit && stage !== 'complete' ? 'glow-box hover:opacity-90' : 'opacity-50 cursor-not-allowed'}`}
+                >
+                  SUBMIT DAY 12
+                  <span className="material-symbols-outlined">arrow_forward</span>
+                </button>
                 
                 <p className="text-center text-on-surface-variant font-label-sm text-label-sm">Make sure your post is public</p>
 
@@ -195,7 +212,7 @@ export default function ChallengeDayPage() {
               </div>
 
               {/* Section C: Completion Celebration */}
-              <section className="px-margin-mobile text-center pt-stack-md pb-stack-xl relative">
+              <section ref={completeSectionRef} className="px-margin-mobile text-center pt-stack-md pb-stack-xl relative">
                 {/* Confetti / Sparkles Background Effect */}
                 <div className="absolute inset-0 pointer-events-none opacity-30 flex items-center justify-center">
                   <div className="w-64 h-64 bg-primary-container rounded-full blur-[100px]"></div>
@@ -206,7 +223,7 @@ export default function ChallengeDayPage() {
                   <svg className="w-full h-full text-primary-container drop-shadow-[0_0_15px_rgba(255,122,26,0.8)] absolute inset-0" viewBox="0 0 100 100">
                     <polygon fill="#1A1A1A" points="50 5, 95 25, 95 75, 50 95, 5 75, 5 25" stroke="currentColor" strokeLinejoin="round" strokeWidth="4"></polygon>
                   </svg>
-                  <span className="material-symbols-outlined text-[64px] text-primary-container relative z-10 glow-icon" style={{ fontVariationSettings: "'wght' 700" }}>check</span>
+                  <span className="material-symbols-outlined text-[64px] text-primary-container relative z-10 glow-text" style={{ fontVariationSettings: "'wght' 700" }}>check</span>
                 </div>
 
                 <h2 className="font-display-lg-mobile text-display-lg-mobile text-on-surface mb-2">DAY 12</h2>
@@ -227,10 +244,10 @@ export default function ChallengeDayPage() {
                 <div className="flex items-center gap-1 mb-stack-xl w-full px-2">
                   <div className="w-6 h-6 rounded-full border border-surface-container-high flex items-center justify-center text-[10px]">10</div>
                   <div className="flex-1 h-px bg-primary-container/30"></div>
-                  <div className="w-3 h-3 rounded-full bg-primary-container glow-icon"></div>
+                  <div className="w-3 h-3 rounded-full bg-primary-container glow-box"></div>
                   <div className="flex-1 h-px bg-primary-container/30"></div>
                   {/* Active Day */}
-                  <div className="w-8 h-8 rounded-full bg-primary-container text-background font-bold flex items-center justify-center text-xs glow-icon ring-2 ring-background z-10">12</div>
+                  <div className="w-8 h-8 rounded-full bg-primary-container text-background font-bold flex items-center justify-center text-xs glow-box ring-2 ring-background z-10">12</div>
                   <div className="flex-1 h-px bg-surface-container-high"></div>
                   <div className="w-6 h-6 rounded-full border border-surface-container-high flex items-center justify-center text-[10px]">13</div>
                   <div className="flex-1 h-px bg-surface-container-high"></div>
@@ -243,7 +260,7 @@ export default function ChallengeDayPage() {
 
                 <Link 
                   href="/dashboard"
-                  className="w-full bg-primary-container text-background font-headline-md text-[20px] font-bold py-4 rounded-xl glow-button flex items-center justify-center gap-2 hover:opacity-90 transition-opacity"
+                  className="w-full bg-primary-container text-background font-headline-md text-[20px] font-bold py-4 rounded-xl glow-box flex items-center justify-center gap-2 hover:opacity-90 transition-opacity"
                 >
                   CONTINUE JOURNEY
                   <span className="material-symbols-outlined">arrow_forward</span>

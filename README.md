@@ -1,45 +1,52 @@
-# ABTalks — Redesign (ViCodathon 2026)
+# ABTalks Redesign - Vicodathon
 
-A modern, mobile-first redesign of the ABTalks 60-day coding challenge platform, built for ABTalks ViCodathon 2026, Problem 1: Redesign ABTalks.
+This project is a redesign of the ABTalks platform for the Vicodathon hackathon. It focuses on delivering a sleek, user-centric experience for participating in a 60-day coding challenge.
 
-## What is ABTalks
-ABTalks is a 60-day coding challenge for college students. Students build something every day, commit it to GitHub, and share progress on LinkedIn to maintain a public learning streak.
+## 🚀 Features
 
-## What this project does
-A fresh, premium, atmospheric ("Sunset Ember") UI/UX redesign of the student-facing experience, built mobile-first at 390px width, covering the three required screens:
+- **Landing Page (`/`)**: A modern entry point introducing the platform and the 60-day challenge.
+- **Student Dashboard (`/dashboard`)**: A progress tracking dashboard showing daily milestones, unlocked challenges, and current streak.
+- **Challenge Day Workflow (`/day/[id]`)**: A dedicated page for each day's challenge, including:
+  - Problem statements, constraints, and examples.
+  - A built-in submission flow to verify progress via GitHub and LinkedIn post URLs.
+  - Interactive "Let's Code" progression and completion celebratory states.
+- **"Sunset Ember" Theme**: A high-contrast, visually engaging aesthetic built with Tailwind CSS.
 
-- **`/`** — Landing Page introducing ABTalks and motivating a student to start the challenge
-- **`/dashboard`** — Student Dashboard showing streak, today's task, progress, and achievements
-- **`/day/12`** — Challenge Day page: problem statement → proof-of-work submission (GitHub + LinkedIn) → completion celebration, all in one flow
+## 🛠️ Tech Stack
 
-## Route Map
-```
-/
-/dashboard
-/day/12
-```
+- **Framework:** [Next.js](https://nextjs.org) (App Router)
+- **Language:** TypeScript
+- **Styling:** Tailwind CSS
+- **Design Inspiration:** Google Stitch & ChatGPT generated concepts
 
-## Tech Stack
-- Next.js (App Router), TypeScript
-- Tailwind CSS
-- No backend, no authentication, no database — all data is static/mocked in the frontend, per the hackathon's stated scope
+## 📝 Note on Scope
 
-## Design Process
-UI/UX designed in Google Stitch, then converted to code with the help of Google AI Studio, Cursor, GitHub Copilot, and Codex, coordinated throughout with Claude. Full details and example prompts are in [`PROMPTS.md`](./PROMPTS.md).
+As per the hackathon requirements, the data presented in this prototype (student streaks, task details, achievements) is **statically mocked** in the frontend. There is no active backend, database, or live authentication implemented for this iteration. 
 
-## Key Differentiator
-A **Recovery Experience** for missed days: instead of resetting to "Streak: 0" and feeling punishing, the design preserves and highlights the student's best streak and offers a clear "Recover / Continue Today" action.
+## 🤖 AI Workflow & Tools Used
 
-## Running Locally
+This project heavily utilized an AI-first workflow for rapid prototyping and debugging:
+
+- **ChatGPT:** Brief analysis, concept generation, and visual inspiration generation.
+- **Claude:** Central coordinator for prompt engineering, UI direction, and major debugging.
+- **Google Stitch:** UI scaffolding and layout generation for the "Sunset Ember" visual direction.
+- **Google AI Studio:** Design-to-code conversion, interactive state wiring, and iterative polish.
+- **Cursor & GitHub Copilot:** Assisted coding inside VS Code.
+- **Codex:** Built out specific structural elements of the Landing page.
+
+*(See `prompt.md` for a deeper breakdown of the AI prompting and debugging workflow).*
+
+## 🏃 Getting Started
+
+First, install the dependencies if you haven't already:
 ```bash
 npm install
+```
+
+Then, run the development server:
+
+```bash
 npm run dev
 ```
-Then open [http://localhost:3000](http://localhost:3000).
 
-## Out of Scope (per hackathon rules)
-Authentication, real user accounts, production database, recruiter dashboard, admin panel, and matching ABTalks' current tech stack are all explicitly out of scope for this submission.
-
-
-## AI Usage
-See [`PROMPTS.md`](./PROMPTS.md) for the full AI-usage log and example prompts.
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
