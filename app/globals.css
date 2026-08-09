@@ -1,0 +1,309 @@
+@import url("https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap");
+@import "tailwindcss";
+@config "../tailwind.config.ts";
+
+:root {
+  --background: #131313;
+  --foreground: #e5e2e1;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #131313;
+    --foreground: #e5e2e1;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+  min-height: max(884px, 100dvh);
+}
+
+.landing-shell {
+  background: #131313;
+  isolation: isolate;
+}
+
+.landing-hero {
+  overflow: visible;
+}
+
+.landing-hero::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 -92px;
+  z-index: 1;
+  height: 180px;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(255, 122, 26, 0.05), transparent 48%),
+    linear-gradient(
+      180deg,
+      rgba(19, 19, 19, 0) 0%,
+      rgba(19, 19, 19, 0.72) 32%,
+      #131313 78%,
+      #131313 100%
+    );
+}
+
+.landing-hero-image {
+  filter: saturate(1.04) contrast(1.02);
+}
+
+.glow-text {
+  text-shadow: 0 0 10px rgba(255, 122, 26, 0.5);
+}
+
+.glow-box {
+  box-shadow: 
+    0 0 24px rgba(255, 122, 26, 0.12),
+    inset 0 2px 4px rgba(255, 255, 255, 0.05);
+  transition: box-shadow 300ms ease, transform 300ms ease, border-color 300ms ease;
+}
+
+.glow-box:hover,
+.glow-box:focus-visible {
+  box-shadow: 
+    0 0 32px rgba(255, 122, 26, 0.24),
+    inset 0 2px 4px rgba(255, 255, 255, 0.08);
+}
+
+.glow-box:active {
+  box-shadow: 
+    0 0 16px rgba(255, 122, 26, 0.12),
+    inset 0 2px 4px rgba(255, 255, 255, 0.05);
+}
+
+.glow-border {
+  box-shadow: 
+    0 0 20px rgba(255, 122, 26, 0.08),
+    inset 0 2px 4px rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 122, 26, 0.15);
+}
+
+@keyframes ring-draw {
+  from { stroke-dasharray: 0, 100; }
+  to { stroke-dasharray: 20, 100; }
+}
+
+.animate-ring {
+  animation: ring-draw 800ms ease-out forwards;
+}
+
+@keyframes dot-pulse {
+  0%, 100% { transform: scale(1); box-shadow: 0 0 8px rgba(255,122,26,0.8); }
+  50% { transform: scale(1.15); box-shadow: 0 0 16px rgba(255,122,26,1); }
+}
+
+.animate-dot-pulse {
+  animation: dot-pulse 2s ease-in-out infinite;
+}
+
+@keyframes flame-breathe {
+  0%, 100% { opacity: 0.8; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.15); }
+}
+
+.animate-flame {
+  animation: flame-breathe 4s ease-in-out infinite;
+}
+
+
+.hero-gradient {
+  background: linear-gradient(
+    to bottom,
+    rgba(19, 19, 19, 0) 0%,
+    rgba(19, 19, 19, 0.42) 68%,
+    rgba(19, 19, 19, 1) 100%
+  );
+}
+
+.landing-icon-button {
+  border-radius: 9999px;
+  transition:
+    color 180ms ease,
+    text-shadow 180ms ease,
+    transform 180ms ease;
+}
+
+.landing-icon-button:hover {
+  text-shadow: 0 0 14px rgba(255, 182, 142, 0.35);
+  transform: translateY(-1px);
+}
+
+.landing-cta {
+  position: relative;
+  overflow: hidden;
+  box-shadow:
+    0 0 20px rgba(255, 122, 26, 0.4),
+    0 10px 30px rgba(0, 0, 0, 0.26),
+    inset 0 2px 4px rgba(255, 255, 255, 0.2);
+  transition:
+    box-shadow 220ms ease,
+    filter 220ms ease,
+    transform 220ms ease;
+}
+
+.landing-cta::before {
+  content: "";
+  position: absolute;
+  inset: -35% auto -35% -65%;
+  width: 58%;
+  pointer-events: none;
+  background: linear-gradient(
+    115deg,
+    transparent 0%,
+    rgba(255, 238, 214, 0.16) 38%,
+    rgba(255, 255, 255, 0.46) 50%,
+    rgba(255, 194, 140, 0.18) 62%,
+    transparent 100%
+  );
+  transform: skewX(-18deg);
+  opacity: 0;
+  transition:
+    left 560ms ease,
+    opacity 220ms ease;
+}
+
+.landing-cta:hover {
+  filter: saturate(1.07) brightness(1.03);
+  box-shadow:
+    0 0 26px rgba(255, 122, 26, 0.62),
+    0 0 52px rgba(255, 166, 79, 0.18),
+    0 14px 34px rgba(0, 0, 0, 0.34),
+    inset 0 2px 6px rgba(255, 255, 255, 0.28);
+}
+
+.landing-cta:hover::before {
+  left: 118%;
+  opacity: 1;
+}
+
+.landing-cta > * {
+  position: relative;
+  z-index: 1;
+}
+
+.landing-step {
+  transition:
+    color 220ms ease,
+    text-shadow 220ms ease,
+    transform 220ms ease;
+}
+
+.landing-step-icon {
+  box-shadow:
+    0 12px 26px rgba(0, 0, 0, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  transition:
+    border-color 220ms ease,
+    box-shadow 220ms ease,
+    background 220ms ease,
+    transform 220ms ease;
+}
+
+.landing-step-icon svg {
+  transition:
+    filter 220ms ease,
+    transform 220ms ease;
+}
+
+.landing-step:hover {
+  transform: translateY(-2px);
+}
+
+.landing-step:hover .landing-step-icon {
+  border-color: rgba(255, 122, 26, 0.72);
+  background:
+    radial-gradient(circle at 50% 35%, rgba(255, 122, 26, 0.14), transparent 62%),
+    #1c1b1b;
+  box-shadow:
+    0 0 18px rgba(255, 122, 26, 0.2),
+    0 14px 30px rgba(0, 0, 0, 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.07);
+}
+
+.landing-step:hover .landing-step-icon svg {
+  filter: drop-shadow(0 0 7px rgba(255, 122, 26, 0.58));
+  transform: scale(1.04);
+}
+
+.landing-down-indicator {
+  opacity: 0.72;
+  transition:
+    color 220ms ease,
+    opacity 220ms ease,
+    transform 220ms ease;
+}
+
+.landing-down-indicator:hover {
+  color: rgba(255, 182, 142, 0.7);
+  opacity: 1;
+  transform: translateY(2px);
+}
+
+.material-symbols-outlined {
+  font-family: "Material Symbols Outlined" !important;
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  font-feature-settings: "liga";
+  -webkit-font-feature-settings: "liga";
+  -webkit-font-smoothing: antialiased;
+  font-variation-settings: "FILL" 1;
+}
+
+.glow-orange {
+  box-shadow: 0 0 15px rgba(255, 122, 26, 0.5);
+}
+
+.sparkle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background-color: #ff7a1a;
+  border-radius: 50%;
+  box-shadow:
+    0 0 4px 2px rgba(255, 255, 255, 0.8),
+    0 0 8px 4px rgba(255, 122, 26, 0.6);
+  animation: twinkle 2s infinite alternate;
+}
+
+@keyframes twinkle {
+  0% {
+    opacity: 0.3;
+    transform: scale(0.8);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+}
+
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}

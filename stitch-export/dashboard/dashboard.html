@@ -1,0 +1,346 @@
+<!DOCTYPE html><html class="dark" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>ABTalks - Student Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Anybody:wght@700;800&amp;family=Hanken+Grotesk:wght@400;500;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+                "on-surface-variant": "#e0c0b1",
+                "primary-fixed": "#ffdbca",
+                "on-tertiary": "#5c1900",
+                "secondary-fixed-dim": "#ffb867",
+                "inverse-on-surface": "#313030",
+                "error-container": "#93000a",
+                "surface-container": "#20201f",
+                "error": "#ffb4ab",
+                "inverse-primary": "#9c4500",
+                "on-primary-fixed": "#331200",
+                "surface-container-low": "#1c1b1b",
+                "inverse-surface": "#e5e2e1",
+                "on-tertiary-fixed-variant": "#822800",
+                "surface-container-highest": "#353535",
+                "surface-variant": "#353535",
+                "on-secondary-fixed": "#2b1700",
+                "on-error": "#690005",
+                "primary-fixed-dim": "#ffb68e",
+                "on-secondary-fixed-variant": "#673d00",
+                "secondary-fixed": "#ffddbb",
+                "on-tertiary-container": "#671e00",
+                "surface-dim": "#131313",
+                "primary-container": "#ff7a1a",
+                "surface-container-lowest": "#0e0e0e",
+                "on-secondary": "#482900",
+                "secondary": "#ffb867",
+                "outline-variant": "#584236",
+                "tertiary-container": "#ff7846",
+                "surface": "#131313",
+                "on-primary-container": "#5e2700",
+                "primary": "#ffb68e",
+                "tertiary-fixed": "#ffdbcf",
+                "surface-container-high": "#2a2a2a",
+                "outline": "#a78b7d",
+                "on-primary": "#542200",
+                "on-primary-fixed-variant": "#773300",
+                "tertiary-fixed-dim": "#ffb59c",
+                "surface-bright": "#393939",
+                "on-secondary-container": "#452800",
+                "on-error-container": "#ffdad6",
+                "on-surface": "#e5e2e1",
+                "on-background": "#e5e2e1",
+                "secondary-container": "#d48300",
+                "background": "#131313",
+                "surface-tint": "#ffb68e",
+                "on-tertiary-fixed": "#390c00",
+                "tertiary": "#ffb59c"
+        },
+        "borderRadius": {
+                "DEFAULT": "0.25rem",
+                "lg": "0.5rem",
+                "xl": "1rem", // changed to match 16px prompt requirement
+                "full": "9999px"
+        },
+        "spacing": {
+                "margin-desktop": "40px",
+                "stack-sm": "8px",
+                "stack-xl": "64px",
+                "stack-md": "16px",
+                "margin-mobile": "20px",
+                "stack-lg": "32px",
+                "max-width": "1200px",
+                "stack-xs": "4px",
+                "gutter": "16px"
+        },
+        "fontFamily": {
+                "code-snippet": [
+                        "JetBrains Mono"
+                ],
+                "headline-md": [
+                        "Anybody"
+                ],
+                "body-lg": [
+                        "Hanken Grotesk"
+                ],
+                "display-lg": [
+                        "Anybody"
+                ],
+                "body-md": [
+                        "Hanken Grotesk"
+                ],
+                "display-lg-mobile": [
+                        "Anybody"
+                ],
+                "label-sm": [
+                        "JetBrains Mono"
+                ]
+        },
+        "fontSize": {
+                "code-snippet": [
+                        "14px",
+                        {
+                                "lineHeight": "20px",
+                                "fontWeight": "400"
+                        }
+                ],
+                "headline-md": [
+                        "24px",
+                        {
+                                "lineHeight": "1.2",
+                                "letterSpacing": "-0.01em",
+                                "fontWeight": "700"
+                        }
+                ],
+                "body-lg": [
+                        "18px",
+                        {
+                                "lineHeight": "28px",
+                                "fontWeight": "400"
+                        }
+                ],
+                "display-lg": [
+                        "48px",
+                        {
+                                "lineHeight": "1.0",
+                                "letterSpacing": "-0.04em",
+                                "fontWeight": "800"
+                        }
+                ],
+                "body-md": [
+                        "16px",
+                        {
+                                "lineHeight": "24px",
+                                "fontWeight": "400"
+                        }
+                ],
+                "display-lg-mobile": [
+                        "32px",
+                        {
+                                "lineHeight": "1.1",
+                                "letterSpacing": "-0.02em",
+                                "fontWeight": "800"
+                        }
+                ],
+                "label-sm": [
+                        "12px",
+                        {
+                                "lineHeight": "16px",
+                                "letterSpacing": "0.05em",
+                                "fontWeight": "500"
+                        }
+                ]
+        }
+},
+    },
+  }
+</script>
+<style>
+    /* specific overrides requested by prompt */
+    .bg-custom-bg { background-color: #0A0A0A; }
+    .bg-custom-card { background-color: #1A1A1A; }
+    
+    .glow-orange {
+        box-shadow: 0 0 15px rgba(255, 122, 26, 0.5);
+    }
+    
+    .sparkle {
+        position: absolute;
+        width: 4px;
+        height: 4px;
+        background-color: #FF7A1A;
+        border-radius: 50%;
+        box-shadow: 0 0 4px 2px rgba(255, 255, 255, 0.8), 0 0 8px 4px rgba(255, 122, 26, 0.6);
+        animation: twinkle 2s infinite alternate;
+    }
+    
+    @keyframes twinkle {
+        0% { opacity: 0.3; transform: scale(0.8); }
+        100% { opacity: 1; transform: scale(1.2); }
+    }
+</style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-custom-bg text-on-surface font-body-md flex justify-center w-full min-h-screen">
+<!-- 390px Mobile Viewport Container -->
+<div class="relative flex h-auto min-h-screen w-[390px] max-w-full flex-col bg-custom-bg shadow-2xl overflow-x-hidden pb-20 border-l border-r border-surface-container">
+<!-- Top Nav -->
+<div class="flex items-center h-16 justify-between px-4 pt-2">
+<div class="flex items-center gap-2">
+<div class="text-primary-container flex size-8 shrink-0 items-center justify-center">
+<span class="material-symbols-outlined text-[28px]" style="font-variation-settings: 'FILL' 1;">local_fire_department</span>
+</div>
+<p class="text-on-surface font-headline-md text-xl">ABTalks</p>
+</div>
+<button class="flex items-center justify-center size-10 rounded-full bg-custom-card text-on-surface hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-[24px]">notifications</span>
+</button>
+</div>
+<div class="flex-1 overflow-y-auto hide-scrollbar">
+<!-- Greeting -->
+<h1 class="text-on-surface font-headline-md text-2xl px-4 pt-6 pb-4">Welcome back, Developer! 🔥</h1>
+<!-- Current Day Card -->
+<div class="px-4 pb-4">
+<div class="bg-custom-card rounded-xl p-6 relative overflow-hidden">
+<div class="flex justify-between items-start z-10 relative">
+<div class="flex flex-col gap-1">
+<p class="text-on-surface-variant font-code-snippet uppercase text-xs tracking-widest font-bold">CURRENT STREAK</p>
+<h2 class="text-on-surface font-display-lg-mobile text-[40px] mt-1">DAY 12<span class="text-on-surface-variant text-xl">/60</span></h2>
+<p class="text-primary-fixed-dim font-label-sm mt-2 flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">emoji_events</span>
+                            Best: 17 days
+                        </p>
+</div>
+<!-- Progress Ring -->
+<div class="relative size-20 flex items-center justify-center mt-2 mr-2">
+<!-- Ring Background -->
+<svg class="absolute inset-0 w-full h-full rotate-[-90deg]" viewBox="0 0 36 36">
+<path class="text-surface-container" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-width="3"></path>
+<path class="text-primary-container glow-orange" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-dasharray="20, 100" stroke-width="3"></path>
+</svg>
+<!-- Icon -->
+<span class="material-symbols-outlined text-[32px] text-primary-container" style="font-variation-settings: 'FILL' 1;">local_fire_department</span>
+<!-- Particles -->
+<div class="sparkle" style="top: -5px; left: 20px; animation-delay: 0s;"></div>
+<div class="sparkle" style="top: 10px; right: -5px; animation-delay: 0.5s;"></div>
+<div class="sparkle" style="bottom: 5px; left: -2px; animation-delay: 1.2s;"></div>
+<div class="sparkle" style="bottom: 15px; right: 5px; animation-delay: 0.8s;"></div>
+<div class="sparkle" style="top: 30px; left: -10px; animation-delay: 1.5s;"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Today's Mission Card -->
+<div class="px-4 pb-4">
+<div class="bg-custom-card rounded-xl p-5 border border-surface-container">
+<div class="flex items-center gap-2 mb-3">
+<span class="material-symbols-outlined text-primary-container text-[20px]">target</span>
+<h3 class="text-on-surface font-headline-md text-lg">Today's Mission</h3>
+</div>
+<h4 class="text-on-surface font-body-lg font-bold mb-3">Binary Search Optimization</h4>
+<div class="flex gap-2 mb-5">
+<span class="px-2.5 py-1 rounded-md bg-secondary-fixed-dim/20 text-secondary-fixed-dim font-label-sm">Medium</span>
+<span class="px-2.5 py-1 rounded-md bg-surface-container-high text-on-surface-variant font-label-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">schedule</span> 45 min
+                    </span>
+</div>
+<button class="w-full h-12 bg-primary-container hover:bg-tertiary-container text-[#1A1A1A] rounded-xl font-bold font-body-md transition-all glow-orange flex items-center justify-center gap-2">
+                    Start Today's Mission 
+                    <span class="material-symbols-outlined text-[20px]">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Your Journey Card -->
+<div class="px-4 pb-4">
+<div class="bg-custom-card rounded-xl p-5">
+<div class="flex justify-between items-center mb-4">
+<h3 class="text-on-surface font-headline-md text-lg">Your Journey</h3>
+<a class="text-primary-container font-label-sm flex items-center gap-0.5 hover:underline" href="#">
+                        View Full Journey <span class="material-symbols-outlined text-[14px]">chevron_right</span>
+</a>
+</div>
+<p class="text-on-surface-variant font-label-sm mb-4">12/60 Days Completed</p>
+<div class="flex justify-between items-center px-1">
+<div class="size-3 rounded-full bg-primary-container"></div>
+<div class="h-0.5 flex-1 bg-primary-container mx-1"></div>
+<div class="size-3 rounded-full bg-primary-container"></div>
+<div class="h-0.5 flex-1 bg-primary-container mx-1"></div>
+<div class="size-3 rounded-full bg-primary-container"></div>
+<div class="h-0.5 flex-1 bg-primary-container mx-1"></div>
+<!-- Active Day -->
+<div class="relative flex flex-col items-center">
+<div class="absolute -top-6 text-primary-container font-code-snippet text-xs font-bold">D12</div>
+<div class="size-5 rounded-full bg-primary-container border-4 border-custom-bg shadow-[0_0_8px_rgba(255,122,26,0.8)] z-10"></div>
+</div>
+<div class="h-0.5 flex-1 bg-surface-container mx-1"></div>
+<div class="size-3 rounded-full bg-surface-container"></div>
+<div class="h-0.5 flex-1 bg-surface-container mx-1"></div>
+<div class="size-3 rounded-full bg-surface-container"></div>
+</div>
+</div>
+</div>
+<!-- Achievements -->
+<div class="px-4 pb-8">
+<h3 class="text-on-surface font-headline-md text-lg mb-4">Achievements</h3>
+<div class="flex gap-4">
+<!-- Badge 1 -->
+<div class="flex flex-col items-center gap-2 flex-1">
+<div class="size-16 rounded-full bg-custom-bg border-2 border-primary-container flex items-center justify-center shadow-[0_0_12px_rgba(255,122,26,0.3)]">
+<span class="material-symbols-outlined text-[32px] text-primary-container" style="font-variation-settings: 'FILL' 1;">local_fire_department</span>
+</div>
+<p class="text-on-surface font-label-sm text-center leading-tight">7 Day<br>Streak</p>
+</div>
+<!-- Badge 2 -->
+<div class="flex flex-col items-center gap-2 flex-1">
+<div class="size-16 rounded-full bg-surface-container-low border border-surface-container flex items-center justify-center opacity-70">
+<span class="material-symbols-outlined text-[32px] text-outline">handyman</span>
+</div>
+<p class="text-outline font-label-sm text-center leading-tight">Early<br>Builder</p>
+</div>
+<!-- Badge 3 -->
+<div class="flex flex-col items-center gap-2 flex-1">
+<div class="size-16 rounded-full bg-surface-container-low border border-surface-container flex items-center justify-center opacity-70">
+<span class="material-symbols-outlined text-[32px] text-outline">task_alt</span>
+</div>
+<p class="text-outline font-label-sm text-center leading-tight">10<br>Missions</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom Nav Bar (Shared Component Pattern) -->
+<div class="absolute bottom-0 w-full flex gap-2 border-t border-surface-container bg-custom-card px-4 pb-6 pt-3 z-50">
+<a class="flex flex-1 flex-col items-center justify-end gap-1 text-primary-container" href="#">
+<div class="flex h-8 items-center justify-center">
+<span class="material-symbols-outlined text-[24px]" style="font-variation-settings: 'FILL' 1;">home</span>
+</div>
+<p class="text-xs font-medium leading-normal tracking-[0.015em]">Home</p>
+</a>
+<a class="flex flex-1 flex-col items-center justify-end gap-1 text-outline hover:text-on-surface-variant transition-colors" href="#">
+<div class="flex h-8 items-center justify-center">
+<span class="material-symbols-outlined text-[24px]">map</span>
+</div>
+<p class="text-xs font-medium leading-normal tracking-[0.015em]">Journey</p>
+</a>
+<a class="flex flex-1 flex-col items-center justify-end gap-1 text-outline hover:text-on-surface-variant transition-colors" href="#">
+<div class="flex h-8 items-center justify-center">
+<span class="material-symbols-outlined text-[24px]">target</span>
+</div>
+<p class="text-xs font-medium leading-normal tracking-[0.015em]">Challenges</p>
+</a>
+<a class="flex flex-1 flex-col items-center justify-end gap-1 text-outline hover:text-on-surface-variant transition-colors" href="#">
+<div class="flex h-8 items-center justify-center">
+<span class="material-symbols-outlined text-[24px]">person</span>
+</div>
+<p class="text-xs font-medium leading-normal tracking-[0.015em]">Profile</p>
+</a>
+</div>
+</div>
+</body></html>
